@@ -1,0 +1,17 @@
+# The name of your scheduled task.  
+$taskName = "Restart Computer"  
+  
+$User= "NT AUTHORITY\SYSTEM"  
+  
+# Describe the scheduled task.  
+$description = "Restart computer daily at 11：00AM"  
+  
+# Create a new task action  
+$taskAction = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument 'Restart-Computer -Force'  
+  
+#Create task trigger  
+$taskTrigger = New-ScheduledTaskTrigger -Daily -At 11:30AM  
+  
+# Register the new PowerShell scheduled task  
+# Register the scheduled task  
+Register-ScheduledTask -TaskName $taskName -Action $taskAction -Trigger $taskTrigger -Description $description -User $User  
